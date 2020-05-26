@@ -68,6 +68,10 @@
 #include <ompl/geometric/planners/prm/SPARS.h>
 #include <ompl/geometric/planners/prm/SPARStwo.h>
 
+#include <ompl/geometric/planners/prm/ValidStateGen.h>
+#include <ompl/geometric/planners/prm/LazyPRMNN3D.h>
+#include <ompl/geometric/planners/prm/LazyPRMNNRS.h>
+
 #include <moveit/ompl_interface/parameterization/joint_space/joint_model_state_space_factory.h>
 #include <moveit/ompl_interface/parameterization/joint_space/joint_model_state_space.h>
 #include <moveit/ompl_interface/parameterization/work_space/pose_model_state_space_factory.h>
@@ -207,6 +211,10 @@ void ompl_interface::PlanningContextManager::registerDefaultPlanners()
   registerPlannerAllocator(   //
       "geometric::SPARStwo",  //
       std::bind(&allocatePlanner<og::SPARStwo>, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+      //my planners  
+  registerPlannerAllocator("geometric::ValidStateGen", std::bind(&allocatePlanner<og::ValidStateGen>, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+  registerPlannerAllocator("geometric::LazyPRMNN3D", std::bind(&allocatePlanner<og::LazyPRMNN3D>, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+  registerPlannerAllocator("geometric::LazyPRMNNRS", std::bind(&allocatePlanner<og::LazyPRMNNRS>, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 }
 
 void ompl_interface::PlanningContextManager::registerDefaultStateSpaces()
